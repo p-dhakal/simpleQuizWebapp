@@ -21,15 +21,34 @@ let correctAnswers = [
 
 export class Quiz extends React.Component {
     state = {
-        q: 0
+        q: 0,
+        optionOneSelected: false,
+        optionTwoSelected: false,
+        optionThreeSelected: false,
+        optionFourSelected: false
     }
-
+    optionOneClicked(){
+        this.setState({optionOneSelected: !this.state.optionOneSelected})
+    }
+    optionTwoClicked(){
+        this.setState({optionTwoSelected: !this.state.optionTwoSelected})
+    }
+    optionThreeClicked(){
+        this.setState({optionThreeSelected: !this.state.optionThreeSelected})
+    }
+    optionFourClicked(){
+        this.setState({optionFourSelected: !this.state.optionFourSelected})
+    }
     onclick(type) {
         this.setState(prevState => {
             return { q: type == 'add' ? prevState.q + 1 : prevState.q - 1 }
         });
     }
     renderQuestion() {
+        let optionOneClass = this.state.optionOneSelected ? "col btn btn-warning p-3 m-2" : "col btn btn-info p-3 m-2";
+        let optionTwoClass = this.state.optionTwoSelected ? "col btn btn-warning p-3 m-2" : "col btn btn-info p-3 m-2";
+        let optionThreeClass = this.state.optionThreeSelected ? "col btn btn-warning p-3 m-2" : "col btn btn-info p-3 m-2";
+        let optionFourClass = this.state.optionFourSelected ? "col btn btn-warning p-3 m-2" : "col btn btn-info p-3 m-2";
         if (this.state.q === 0) {
             return (
                 <div>
@@ -37,11 +56,11 @@ export class Quiz extends React.Component {
                     <h3>{questions[0][0]}</h3>
                     <br />
                     <div className="row">
-                        <div className="col badge badge-info p-3 m-2">{questions[0][1]}</div>
-                        <div className="col badge badge-info p-3 m-2">{questions[0][2]}</div>
+                        <button className={optionOneClass} onClick={() => this.optionOneClicked()}>{questions[0][1]}</button>
+                        <button className={optionTwoClass} onClick={() => this.optionTwoClicked()}>{questions[0][2]}</button>
                         <div className="w-100"></div>
-                        <div className="col badge badge-info p-3 m-2">{questions[0][3]}</div>
-                        <div className="col badge badge-info p-3 m-2">{questions[0][4]}</div>
+                        <button className={optionThreeClass} onClick={() => this.optionThreeClicked()}>{questions[0][3]}</button>
+                        <button className={optionFourClass} onClick={() => this.optionFourClicked()}>{questions[0][4]}</button>
                     </div>
                     <br />
                     <button className="btn btn-secondary" onClick={this.onclick.bind(this, 'add')}>Next question</button>
@@ -57,11 +76,11 @@ export class Quiz extends React.Component {
                         <h3>{questions[i][0]}</h3>
                         <br />
                         <div className="row">
-                            <div className="col badge badge-info p-3 m-2">{questions[i][1]}</div>
-                            <div className="col badge badge-info p-3 m-2">{questions[i][2]}</div>
+                            <button className={optionOneClass} onClick={() => this.optionOneClicked()}>{questions[i][1]}</button>
+                            <button className={optionTwoClass} onClick={() => this.optionTwoClicked()}>{questions[i][2]}</button>
                             <div className="w-100"></div>
-                            <div className="col badge badge-info p-3 m-2">{questions[i][3]}</div>
-                            <div className="col badge badge-info p-3 m-2">{questions[i][4]}</div>
+                            <button className={optionThreeClass} onClick={() => this.optionThreeClicked()}>{questions[i][3]}</button>
+                            <button className={optionFourClass} onClick={() => this.optionFourClicked()}>{questions[i][4]}</button>
                         </div>
                         <br />
                         <div className="btn-group" >
