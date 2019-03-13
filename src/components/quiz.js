@@ -29,17 +29,33 @@ export class Quiz extends React.Component {
     }
     optionOneClicked(){
         this.setState({optionOneSelected: !this.state.optionOneSelected})
+        this.setState({optionThreeSelected: false})
+        this.setState({optionFourSelected: false})
+        this.setState({optionTwoSelected: false})
     }
     optionTwoClicked(){
         this.setState({optionTwoSelected: !this.state.optionTwoSelected})
+        this.setState({optionThreeSelected: false})
+        this.setState({optionFourSelected: false})
+        this.setState({optionOneSelected: false})
     }
     optionThreeClicked(){
         this.setState({optionThreeSelected: !this.state.optionThreeSelected})
+        this.setState({optionOneSelected: false})
+        this.setState({optionFourSelected: false})
+        this.setState({optionTwoSelected: false})
     }
     optionFourClicked(){
         this.setState({optionFourSelected: !this.state.optionFourSelected})
+        this.setState({optionThreeSelected: false})
+        this.setState({optionOneSelected: false})
+        this.setState({optionTwoSelected: false})
     }
-    onclick(type) {
+    nextPrevButtonClicked(type) {
+        this.setState({optionThreeSelected: false})
+        this.setState({optionFourSelected: false})
+        this.setState({optionTwoSelected: false})
+        this.setState({optionOneSelected: false})
         this.setState(prevState => {
             return { q: type == 'add' ? prevState.q + 1 : prevState.q - 1 }
         });
@@ -63,7 +79,7 @@ export class Quiz extends React.Component {
                         <button className={optionFourClass} onClick={() => this.optionFourClicked()}>{questions[0][4]}</button>
                     </div>
                     <br />
-                    <button className="btn btn-secondary" onClick={this.onclick.bind(this, 'add')}>Next question</button>
+                    <button className="btn btn-secondary" onClick={this.nextPrevButtonClicked.bind(this, 'add')}>Next question</button>
                 </div>
 
             );
@@ -84,8 +100,8 @@ export class Quiz extends React.Component {
                         </div>
                         <br />
                         <div className="btn-group" >
-                            <button className="btn btn-secondary" onClick={this.onclick.bind(this, 'add')}>Next question</button>
-                            <button className="btn btn-secondary" onClick={this.onclick.bind(this, 'sub')}>Previous question</button>
+                            <button className="btn btn-secondary" onClick={this.nextPrevButtonClicked.bind(this, 'add')}>Next question</button>
+                            <button className="btn btn-secondary" onClick={this.nextPrevButtonClicked.bind(this, 'sub')}>Previous question</button>
                         </div>
 
                     </div>
