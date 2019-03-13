@@ -5,16 +5,15 @@ export class App extends React.Component {
     state = {
         screen : 0
     }
-    setState(){
-        this.state.screen = 1;
-    }
+    
+    
     renderScreen(){
         if(this.state.screen === 0){
             return(
-                <div>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                     <h1>Simple Quiz</h1>
                     <div>
-                        <button onClick = {this.setState()}>Click here to start</button>
+                        <button onClick={() => this.setState({screen:1})}>Click here to start</button>
                     </div>
                 </div>
             );
@@ -28,7 +27,7 @@ export class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <div className="border m-2" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <div className="border m-2" style={{height: '100vh' }} >
                     {this.renderScreen()}
                 </div>
             </div>
